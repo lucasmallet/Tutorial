@@ -1,0 +1,241 @@
+---
+title: "Tutorial_script"
+author: "Lucas Mallet"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+#  *Operators*
+## Arithmetic
+
+| sign | description                                              | example |
+| :--: | :------------------------------------------------------- | :-----: |
+|  +   | **Addition** of two operators                            |  a + b  |
+|  -   | **Subtraction** of second operand from first             |  a – b  |
+|  **  | **Multiplication** of two operands                       |  a * b  |
+|  /   | **Division** of first operand with second                |  a / b  |
+|  %%  | **Remainder** from division of first operand with second | a %% b  |
+| %/%  | **Quotient** from division of first operand with second  | a %/% b |
+|  ^   | First operand raised to the **power** of second operand  |   a^b   |
+
+## Relational
+
+| sign | description                                                  | example |
+| :--: | :----------------------------------------------------------- | :-----: |
+|  <   | Is first operand **less** than second operand                |  a < b  |
+|  >   | Is first operand **greater** than second operand             |  a > b  |
+|  ==  | Is first operand **equal** to second operand                 | a == b  |
+|  <=  | Is first operand **less than or equal** to second operand    | a <= b  |
+|  >=  | Is first operand **greater than or equal** to second operand | a >= b  |
+|  !=  | Is first operand **not equal** to second operand             | a != b  |
+
+## Logical
+
+| sign | description                            | example  |
+| :--: | :------------------------------------- | :------: |
+|  &   | Element wise logical **AND** operation |  a & b   |
+|  \|  | Element wise logical **OR** operation  |  a \| b  |
+|  !   | Element wise logical **NOT** operation |    !a    |
+|  &&  | Operand wise logical **AND** operation |  a && b  |
+| \|\| | Operand wise logical **OR** operation  | a \|\| b |
+
+## Assignement
+|  sign  | description                                   | example |
+| :----: | :-------------------------------------------- | :-----: |
+| = / <- | Assigns right side value to left side operand | a <- 3  |
+|   ->   | Assigns left side value to right side operand | 4 -> b  |
+
+## Miscellaneous
+
+| sign | description                                                                                   |  example   |
+| :--: | :-------------------------------------------------------------------------------------------- | :--------: |
+|  :   | Creates series of numbers from left operand to right operand                                  |    a:b     |
+| %in% | Identifies if an element "a" belongs to a vector "b"                                          |  a %in% b  |
+| %*%  | Performs multiplication of a vector with its transpose                                        | A %*% t(A) |
+| %>%  | Creates a pipe where the first object is integrated in the second (alternative to nestedness) | a %>% b()  |
+
+## Other
+
+|  sign  | description                                                                                                                                                                                                                                                                                                                                                           |
+| :----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  ( )   | Round brackets (also known as "parenthesis") are used primarily when calling a function in R. Every function must be called using the round brackets.                                                                                                                                                                                                                 |
+|  [ ]   | The square brackets are used for indexing into a vector, matrix, array, list or dataframe. You can think of the square brackets as marking the edges of a cell, column or row of a table. The square brackets are also called _extraction operators_ as they are used to _extract_ specific elements from a vector or matrix. _["number of row", "number of column"]_ |
+| \[[ ]] | allows only a single element to be selected using integer or character indices, whereas `[` allows indexing by vectors.                                                                                                                                                                                                                                               |
+|  { }   | Curly braces are used to group multiple expressions together into a **block of code**. They ensure that the grouped expressions are executed as a single unit                                                                                                                                                                                                         |
+
+# *Objects* 
+## Basic
+
+| type of object | description                                                                                                                                                                                                                                         |
+| :------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|    Numeric     | -  **Double** : allows you to store numbers as decimals. This is the default treatment for numbers<br>- **Integer** : an integer is a subset of the numeric data type. This type will only allow whole numbers and is denoted by the letter “L”<br> |
+|    Complex     | imaginary number through the use of the lowercase letter “i”                                                                                                                                                                                        |
+|   Character    | store text data : between quote as "text"                                                                                                                                                                                                           |
+|    Logical     | boolean data : TRUE / FALSE                                                                                                                                                                                                                         |
+## Complex
+| type of object | description                                                                                                                                                                                                                                |
+| :------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|     Vector     | ordered collection of numbers or character strings indexed by the integers 1, 2, …, n, where n is the length of the vector.                                                                                                                |
+|     Factor     | special kind of vector which contains underlying numeric values 1, 2, …, n, but each of these n values has an associated character label (which may or may not be the numeric value). These labeled values are the **levels** of the facto |
+|     Matrix     | two-dimensional collection of numeric or character values indexed by pairs of integers (i, j).                                                                                                                                             |
+|     Array      | n-dimensional collection of numeric or character values indexed by n-tuples of integers (e.g., (i,j,k) for a 3-dimensional array                                                                                                           |
+|      List      | an ordered collection of objects, and the objects in the list can be of different types.                                                                                                                                                   |
+|   Data frame   | type of list commonly used to store datasets, with a row for each observation and a column for each variable, and each variable can be of a different type                                                                                 |
+
+# *Examples* (R script)
+## Operator 
+```{r}
+# Arithmetic
+x <- 5
+y <- 16
+x + y
+x - y
+x * y
+y / x
+y %/% x
+y %% x
+y ^ x
+
+# Relational 
+x < y
+x > y
+x <= 5
+y >= 20
+y == 16
+x != 5
+
+# Logical
+a <- c(FALSE,  0,     6,     TRUE) ## Zero is considered FALSE and non-zero numbers are taken as TRUE. Let's see an example for this:
+b <- c(TRUE,   FALSE, TRUE,  TRUE)
+!a
+a & b
+b & a
+a && b
+a | b
+a || b 
+
+# Miscellaneous 
+library("dplyr")
+
+## :
+u <- c(2:9) 
+
+## %in%
+c("1","4", "2.8") %in% u
+
+## %*%
+x <- 1:4
+(z <- x %*% x)    # scalar ("inner") product as : ∑(xi.yi) <=> z=1*1+2*2+3*3+4*4 = 30
+drop(z)             # drop() delete tge dimension of array which have only one level. Becomes scalar
+
+(y <- diag(x))
+(z <- matrix(1:12, ncol = 3, nrow = 4)) 
+y %*% z
+y %*% x
+x %*% z
+
+## %>%
+v <- c(1.2, 8.7, 5.6, 11.4)
+v %>% 
+  mean() %>%
+  round(digits = 1) %>%
+  format(decimal.mark = ",") %>%
+  paste0("La moyenne est de ", .,".")
+
+paste0("La moyenne est de ",(format(round(mean(v), digits = 1), decimal.mark = ",")),".") # with parenthesis : struggle for reading code
+```
+
+## Specific to curly braces
+###  Defining block codes 
+When curly braces are used, all the expressions inside them are evaluated together. The result of the last evaluated expression is returned. For example:
+```{r}
+{
+  x <- 10
+  y <- 20
+  x + y
+}
+```
+
+### Control flow statements
+Curly braces are required in control flow structures like `if`, `for`, and `while` to group the statements executed within the block.
+``` {r}
+x <- 5
+if (x > 3) {
+  print("x is greater than 3")
+}
+
+```
+
+### Functions definition
+Curly braces define the body of a function in R. They contain the statements that the function will execute.
+``` {r}
+my_function <- function(a, b) {
+  result <- a + b
+  return(result)
+}
+my_function(3, 4)  
+```
+
+### Anonymous blocks for clarity
+``` {r}
+{
+  temp <- sqrt(25)
+  print(temp)
+}
+```
+
+### Scoping
+Curly braces can be used to limit the scope of variables. Variables declared inside a `{}` block are not accessible outside that block.
+``` {r}
+local({
+  y <- 10  
+  print(y) 
+})
+print(y) 
+```
+
+## Object
+```{r}
+# numeric
+x <- 5
+x
+class(x)
+
+# character
+y <- "elevated blood pressure"
+y
+class(y)
+
+# vector
+z <- c(5, 8, 12)
+z 
+z[2] # second element of vector
+
+# factor
+y <- factor(c("poulet", "poule", "poule", "coq"),
+            levels = c("poulet", "poule", "coq"),
+            labels = c("POT", "POL", "COQ"))
+levels(y)
+
+# matrix
+x <- matrix(c(1,2,3,4,5,6), nrow = 2, ncol = 3)
+x
+
+# array
+z <- array(c(1,2,3,4,5,6,7,8), dim = c(2,2,2))
+z
+
+# list
+x <- list("5", c(1,2,3), y) # I put y, an object we created earlier, in this list
+x
+
+x[[2]]
+x[[3]]
+
+# dataframe
+d <- data.frame(outcome = c(1,0,1,1),
+                exposure = c("yes", "yes", "no", "no"),
+                age = c(24, 55, 39, 18))
+d
+```
+
